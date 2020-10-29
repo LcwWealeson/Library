@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: root
+    password: 1065807369--
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library?userUnicode=true&chracterEncoding=utf-8&serverTimezone=UTC
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.library.pojo
+
