@@ -2,19 +2,18 @@ package com.example.library.pojo;
 
 public class User {
     private Integer userId;
-
     private String account;
-
     private String password;
-
     private String username;
-
     private Integer type;
-
     private String image;
 
+
+    public User() {
+    }
+
     public Integer getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public void setUserId(Integer userId) {
@@ -22,7 +21,7 @@ public class User {
     }
 
     public String getAccount() {
-        return account;
+        return this.account;
     }
 
     public void setAccount(String account) {
@@ -30,7 +29,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -38,7 +37,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -46,7 +45,7 @@ public class User {
     }
 
     public Integer getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(Integer type) {
@@ -54,10 +53,11 @@ public class User {
     }
 
     public String getImage() {
-        return image;
+        return this.image;
     }
 
     public void setImage(String image) {
         this.image = image == null ? null : image.trim();
     }
+
 }
