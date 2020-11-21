@@ -20,22 +20,32 @@ public class BookInfo {
 
     private String location;
 
-    private Integer status;
-
     private String bookCode;
 
     private Date storeTime;
 
     private String image;
 
-    private int bookNumber;
+    private Integer number;
 
-    public int getBookNumber() {
-        return bookNumber;
-    }
+    private Integer numberBorrowed;
 
-    public void setBookNumber(int bookNumber) {
-        this.bookNumber = bookNumber;
+    private Integer numberStay;
+
+    public BookInfo(Integer bookId, String bookName, Integer bookCate, String author, String publisher,
+                    String location, String bookCode, Date storeTime, String image, Integer number, Integer numberBorrowed, Integer numberStay) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.bookCate = bookCate;
+        this.author = author;
+        this.publisher = publisher;
+        this.location = location;
+        this.bookCode = bookCode;
+        this.storeTime = storeTime;
+        this.image = image;
+        this.number = number;
+        this.numberBorrowed = numberBorrowed;
+        this.numberStay = numberStay;
     }
 
     public Integer getBookId() {
@@ -51,7 +61,7 @@ public class BookInfo {
     }
 
     public void setBookName(String bookName) {
-        this.bookName = bookName == null ? null : bookName.trim();
+        this.bookName = bookName;
     }
 
     public Integer getBookCate() {
@@ -67,7 +77,7 @@ public class BookInfo {
     }
 
     public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
+        this.author = author;
     }
 
     public String getPublisher() {
@@ -75,7 +85,7 @@ public class BookInfo {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher == null ? null : publisher.trim();
+        this.publisher = publisher;
     }
 
     public String getLocation() {
@@ -83,15 +93,7 @@ public class BookInfo {
     }
 
     public void setLocation(String location) {
-        this.location = location == null ? null : location.trim();
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+        this.location = location;
     }
 
     public String getBookCode() {
@@ -99,7 +101,39 @@ public class BookInfo {
     }
 
     public void setBookCode(String bookCode) {
-        this.bookCode = bookCode == null ? null : bookCode.trim();
+        this.bookCode = bookCode;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Integer getNumberBorrowed() {
+        return numberBorrowed;
+    }
+
+    public void setNumberBorrowed(Integer numberBorrowed) {
+        this.numberBorrowed = numberBorrowed;
+    }
+
+    public Integer getNumberStay() {
+        return numberStay;
+    }
+
+    public void setNumberStay(Integer numberStay) {
+        this.numberStay = numberStay;
     }
 
     public Date getStoreTime() throws ParseException {
@@ -112,11 +146,5 @@ public class BookInfo {
         this.storeTime = storeTime;
     }
 
-    public String getImage() {
-        return image;
-    }
 
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
 }

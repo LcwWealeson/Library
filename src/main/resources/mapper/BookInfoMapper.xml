@@ -8,10 +8,12 @@
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="publisher" jdbcType="VARCHAR" property="publisher" />
     <result column="location" jdbcType="VARCHAR" property="location" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="book_code" jdbcType="VARCHAR" property="bookCode" />
-    <result column="store_time" jdbcType="TIMESTAMP" property="storeTime" javaType="java.util.Date"/>
+    <result column="store_time" jdbcType="TIMESTAMP" property="storeTime" />
     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="number_own" jdbcType="INTEGER" property="numberOwn" />
+    <result column="number_borrowed" jdbcType="INTEGER" property="numberBorrowed" />
+    <result column="number_stay" jdbcType="INTEGER" property="numberStay" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    book_id, book_name, book_cate, author, publisher, location, status, book_code, store_time, 
-    image
+    book_id, book_name, book_cate, author, publisher, location, book_code, store_time, 
+    image, number_own, number_borrowed, number_stay
   </sql>
   <select id="selectByExample" parameterType="com.example.library.pojo.BookInfoExample" resultMap="BaseResultMap">
     select
@@ -108,12 +110,14 @@
   <insert id="insert" parameterType="com.example.library.pojo.BookInfo">
     insert into book_info (book_id, book_name, book_cate, 
       author, publisher, location, 
-      status, book_code, store_time, 
-      image)
+      book_code, store_time, image, 
+      number_own, number_borrowed, number_stay
+      )
     values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookCate,jdbcType=INTEGER}, 
       #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{bookCode,jdbcType=VARCHAR}, #{storeTime,jdbcType=TIMESTAMP}, 
-      #{image,jdbcType=VARCHAR})
+      #{bookCode,jdbcType=VARCHAR}, #{storeTime,jdbcType=TIMESTAMP}, #{image,jdbcType=VARCHAR}, 
+      #{numberOwn,jdbcType=INTEGER}, #{numberBorrowed,jdbcType=INTEGER}, #{numberStay,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.library.pojo.BookInfo">
     insert into book_info
@@ -136,9 +140,6 @@
       <if test="location != null">
         location,
       </if>
-      <if test="status != null">
-        status,
-      </if>
       <if test="bookCode != null">
         book_code,
       </if>
@@ -147,6 +148,15 @@
       </if>
       <if test="image != null">
         image,
+      </if>
+      <if test="numberOwn != null">
+        number_own,
+      </if>
+      <if test="numberBorrowed != null">
+        number_borrowed,
+      </if>
+      <if test="numberStay != null">
+        number_stay,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -168,9 +178,6 @@
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
       <if test="bookCode != null">
         #{bookCode,jdbcType=VARCHAR},
       </if>
@@ -179,6 +186,15 @@
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOwn != null">
+        #{numberOwn,jdbcType=INTEGER},
+      </if>
+      <if test="numberBorrowed != null">
+        #{numberBorrowed,jdbcType=INTEGER},
+      </if>
+      <if test="numberStay != null">
+        #{numberStay,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -209,9 +225,6 @@
       <if test="record.location != null">
         location = #{record.location,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
       <if test="record.bookCode != null">
         book_code = #{record.bookCode,jdbcType=VARCHAR},
       </if>
@@ -220,6 +233,15 @@
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberOwn != null">
+        number_own = #{record.numberOwn,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberBorrowed != null">
+        number_borrowed = #{record.numberBorrowed,jdbcType=INTEGER},
+      </if>
+      <if test="record.numberStay != null">
+        number_stay = #{record.numberStay,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -234,10 +256,12 @@
       author = #{record.author,jdbcType=VARCHAR},
       publisher = #{record.publisher,jdbcType=VARCHAR},
       location = #{record.location,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
       book_code = #{record.bookCode,jdbcType=VARCHAR},
       store_time = #{record.storeTime,jdbcType=TIMESTAMP},
-      image = #{record.image,jdbcType=VARCHAR}
+      image = #{record.image,jdbcType=VARCHAR},
+      number_own = #{record.numberOwn,jdbcType=INTEGER},
+      number_borrowed = #{record.numberBorrowed,jdbcType=INTEGER},
+      number_stay = #{record.numberStay,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -260,9 +284,6 @@
       <if test="location != null">
         location = #{location,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
       <if test="bookCode != null">
         book_code = #{bookCode,jdbcType=VARCHAR},
       </if>
@@ -271,6 +292,15 @@
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOwn != null">
+        number_own = #{numberOwn,jdbcType=INTEGER},
+      </if>
+      <if test="numberBorrowed != null">
+        number_borrowed = #{numberBorrowed,jdbcType=INTEGER},
+      </if>
+      <if test="numberStay != null">
+        number_stay = #{numberStay,jdbcType=INTEGER},
       </if>
     </set>
     where book_id = #{bookId,jdbcType=INTEGER}
@@ -282,22 +312,24 @@
       author = #{author,jdbcType=VARCHAR},
       publisher = #{publisher,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
       book_code = #{bookCode,jdbcType=VARCHAR},
       store_time = #{storeTime,jdbcType=TIMESTAMP},
-      image = #{image,jdbcType=VARCHAR}
+      image = #{image,jdbcType=VARCHAR},
+      number_own = #{numberOwn,jdbcType=INTEGER},
+      number_borrowed = #{numberBorrowed,jdbcType=INTEGER},
+      number_stay = #{numberStay,jdbcType=INTEGER}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
 
-  <!--方便注入的sql语段-->
+<!--    -->
   <sql id="selectAllFields">
-    book_name,book_cate,author,publisher,location,status,book_code,store_time,image
-  </sql>
+  book_name,book_cate,author,publisher,location,status,book_code,store_time,image
+</sql>
 
 
   <!-- 自定义mapper -->
   <select id="getBookList" resultMap="BaseResultMap">
-    select <include refid="selectAllFields"></include>
+    select <include refid="Base_Column_List"></include>
     from book_info
   </select>
 </mapper>
