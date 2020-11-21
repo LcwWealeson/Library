@@ -27,4 +27,6 @@ public interface BookInfoMapper {
     int updateByPrimaryKeySelective(BookInfo record);
 
     int updateByPrimaryKey(BookInfo record);
+
+    List<BookInfo> getBookList();
 }

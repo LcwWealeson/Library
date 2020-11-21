@@ -1,5 +1,10 @@
 package com.example.library.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookInfo {
@@ -22,6 +27,16 @@ public class BookInfo {
     private Date storeTime;
 
     private String image;
+
+    private int bookNumber;
+
+    public int getBookNumber() {
+        return bookNumber;
+    }
+
+    public void setBookNumber(int bookNumber) {
+        this.bookNumber = bookNumber;
+    }
 
     public Integer getBookId() {
         return bookId;
@@ -87,8 +102,10 @@ public class BookInfo {
         this.bookCode = bookCode == null ? null : bookCode.trim();
     }
 
-    public Date getStoreTime() {
-        return storeTime;
+    public Date getStoreTime() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return simpleDateFormat.parse(simpleDateFormat.format(storeTime));
     }
 
     public void setStoreTime(Date storeTime) {
