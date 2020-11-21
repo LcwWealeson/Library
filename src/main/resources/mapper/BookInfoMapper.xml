@@ -10,7 +10,7 @@
     <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="book_code" jdbcType="VARCHAR" property="bookCode" />
-    <result column="store_time" jdbcType="TIMESTAMP" property="storeTime" />
+    <result column="store_time" jdbcType="TIMESTAMP" property="storeTime" javaType="java.util.Date"/>
     <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -288,4 +288,16 @@
       image = #{image,jdbcType=VARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
+
+  <!--方便注入的sql语段-->
+  <sql id="selectAllFields">
+    book_name,book_cate,author,publisher,location,status,book_code,store_time,image
+  </sql>
+
+
+  <!-- 自定义mapper -->
+  <select id="getBookList" resultMap="BaseResultMap">
+    select <include refid="selectAllFields"></include>
+    from book_info
+  </select>
 </mapper>
