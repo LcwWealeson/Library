@@ -308,17 +308,30 @@
     order by book_code asc
   </select>
 
-  <select id="getStayBorrowedNum" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select number_borrowed, number_stay
-    from book_info
-    where book_id = #{bookId}
-  </select>
-
-  <update id="reduceBookNumber" parameterType="java.lang.Integer">
+  <update id="updateStatusByIdAndBookCode">
     update book_info
-    set number_stay =#{stay}, number_borrowed=#{borrowed}
-    where book_id =#{bookId}
+    set status =#{status}
+    where book_code =#{bookCode}
   </update>
 
+  <delete id="deleteByBookId" parameterType="java.lang.Integer">
+    delete from book_info
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
 
+  <update id="updateBook" >
+    update book_info
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="author != null">
+        book_code = #{author,jdbcType=VARCHAR}
+      </if>
+      <if test="publisher != null">
+        book_code = #{publisher,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where book_id = #{bookId}
+  </update>
 </mapper>

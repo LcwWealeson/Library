@@ -305,27 +305,54 @@
   </update>
 
   <!--自定义mapper-->
+<!--  借阅系统获取所有记录-->
   <select id="getAllBorrowRecord" resultMap="BaseResultMap">
     select * from borrow_record
-    where status=1
+    where status = 1
   </select>
-
+<!-- 归还系统获取所有记录-->
+  <select id="getAllBorrowedRecords" resultMap="BaseResultMap">
+    select * from borrow_record
+    where status = 2
+  </select>
+  
   <update id="updateStatusByIdAndBookCode">
     update borrow_record
-    set status = 2
+    set status = #{status}
     where id=#{borrowId} and book_Code=#{bookCode}
   </update>
 
   <select id="getByCodeOrName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select * from borrow_record
-    <where>
+    select * from borrow_record where status = 1
       <if test="bookName != null">
         and book_name = #{bookName,jdbcType=VARCHAR}
       </if>
       <if test="bookCode != null">
         and book_code = #{bookCode,jdbcType=VARCHAR}
       </if>
-    </where>
     order by book_code asc
   </select>
+
+  <select id="getBorrowedByCodeOrName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from borrow_record where status = 2
+      <if test="bookName != null">
+        and book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookCode != null">
+        and book_code = #{bookCode,jdbcType=VARCHAR}
+      </if>
+    order by book_code asc
+  </select>
+
+  <update id="updateBook" >
+    update borrow_record
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where book_id = #{bookId}
+  </update>
+
+
 </mapper>

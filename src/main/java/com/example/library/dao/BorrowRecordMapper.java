@@ -32,5 +32,11 @@ public interface BorrowRecordMapper {
 
     List<BorrowRecord> getByCodeOrName(String bookName,String bookCode);
 
-    int updateStatusByIdAndBookCode(Integer borrowId,String bookCode);
+    int updateStatusByIdAndBookCode(Integer borrowId, String bookCode, Integer status);
+
+    List<BorrowRecord> getBorrowedByCodeOrName(String bookName,String bookCode);
+
+    List<BorrowRecord> getAllBorrowedRecords();
+
+    int updateBook(Integer bookId, String bookName);
 }

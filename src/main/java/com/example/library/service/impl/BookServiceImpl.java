@@ -2,6 +2,7 @@ package com.example.library.service.impl;
 
 import com.example.library.common.ServerResponse;
 import com.example.library.dao.BookInfoMapper;
+import com.example.library.dao.BorrowRecordMapper;
 import com.example.library.pojo.*;
 import com.example.library.service.IBookService;
 import com.example.library.utils.DateUtil;
@@ -19,7 +20,8 @@ public class BookServiceImpl implements IBookService {
     @Autowired
     BookInfoMapper bookInfoMapper;
 
-
+    @Autowired
+    BorrowRecordMapper borrowRecordMapper;
 
     @Override
     public List<BookInfo> getAllBook() {
@@ -52,9 +54,18 @@ public class BookServiceImpl implements IBookService {
         return ServerResponse.createBySuccessMessage("查询成功",bookInfo2BookInfoVo(bookInfoList));
     }
 
+    @Override
+    public ServerResponse deleteByBookId(Integer bookId) {
+        int row =bookInfoMapper.deleteByBookId(bookId);
+        return ServerResponse.createBySuccessMessage("下架图书"+row+"行，"+bookId);
+    }
 
-
-
+    @Override
+    public ServerResponse updateBook(Integer bookId, String bookName, String author, String publisher) {
+        int row = bookInfoMapper.updateBook(bookId,bookName,author,publisher);
+        int borrowRow = borrowRecordMapper.updateBook(bookId,bookName);
+        return ServerResponse.createBySuccessMessage("修改书籍信息"+row+"行，"+bookId+"，同步修改借阅信息"+borrowRow+"行");
+    }
 
     //bookInfo 和 bookInfoVO 类型转化 ，时间转化为string
     public List<BookInfoVO> bookInfo2BookInfoVo(List<BookInfo> bookInfoList) {

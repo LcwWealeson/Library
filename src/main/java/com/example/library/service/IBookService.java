@@ -16,7 +16,7 @@ public interface IBookService {
 
     ServerResponse getBookByCodeOrName(String bookCode ,String bookName);
 
+    ServerResponse deleteByBookId(Integer bookId);
 
-
-
+    ServerResponse updateBook(Integer bookId,String bookName, String author, String publisher);
 }
