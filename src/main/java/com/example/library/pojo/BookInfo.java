@@ -1,10 +1,5 @@
 package com.example.library.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookInfo {
@@ -26,27 +21,7 @@ public class BookInfo {
 
     private String image;
 
-    private Integer number;
-
-    private Integer numberBorrowed;
-
-    private Integer numberStay;
-
-    public BookInfo(Integer bookId, String bookName, Integer bookCate, String author, String publisher,
-                    String location, String bookCode, Date storeTime, String image, Integer number, Integer numberBorrowed, Integer numberStay) {
-        this.bookId = bookId;
-        this.bookName = bookName;
-        this.bookCate = bookCate;
-        this.author = author;
-        this.publisher = publisher;
-        this.location = location;
-        this.bookCode = bookCode;
-        this.storeTime = storeTime;
-        this.image = image;
-        this.number = number;
-        this.numberBorrowed = numberBorrowed;
-        this.numberStay = numberStay;
-    }
+    private Integer status;
 
     public Integer getBookId() {
         return bookId;
@@ -61,7 +36,7 @@ public class BookInfo {
     }
 
     public void setBookName(String bookName) {
-        this.bookName = bookName;
+        this.bookName = bookName == null ? null : bookName.trim();
     }
 
     public Integer getBookCate() {
@@ -77,7 +52,7 @@ public class BookInfo {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.author = author == null ? null : author.trim();
     }
 
     public String getPublisher() {
@@ -85,7 +60,7 @@ public class BookInfo {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher;
+        this.publisher = publisher == null ? null : publisher.trim();
     }
 
     public String getLocation() {
@@ -93,7 +68,7 @@ public class BookInfo {
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location == null ? null : location.trim();
     }
 
     public String getBookCode() {
@@ -101,7 +76,15 @@ public class BookInfo {
     }
 
     public void setBookCode(String bookCode) {
-        this.bookCode = bookCode;
+        this.bookCode = bookCode == null ? null : bookCode.trim();
+    }
+
+    public Date getStoreTime() {
+        return storeTime;
+    }
+
+    public void setStoreTime(Date storeTime) {
+        this.storeTime = storeTime;
     }
 
     public String getImage() {
@@ -109,42 +92,14 @@ public class BookInfo {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
-
-    public Integer getNumberBorrowed() {
-        return numberBorrowed;
-    }
-
-    public void setNumberBorrowed(Integer numberBorrowed) {
-        this.numberBorrowed = numberBorrowed;
-    }
-
-    public Integer getNumberStay() {
-        return numberStay;
-    }
-
-    public void setNumberStay(Integer numberStay) {
-        this.numberStay = numberStay;
-    }
-
-    public Date getStoreTime() throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        return simpleDateFormat.parse(simpleDateFormat.format(storeTime));
-    }
-
-    public void setStoreTime(Date storeTime) {
-        this.storeTime = storeTime;
-    }
-
-
 }
