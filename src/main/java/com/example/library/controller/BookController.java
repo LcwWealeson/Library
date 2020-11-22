@@ -42,5 +42,13 @@ public class BookController {
         return bookService.getBook();
     }
 
+    @PostMapping("/add")
+    public ServerResponse addBook(@RequestBody BookInfo bookInfo){
+        return bookService.addBook(bookInfo);
+    }
 
+    @GetMapping("/getByCodeOrName")
+    public ServerResponse getByCodeOrName(String bookCode , String bookName){
+        return bookService.getBookByCodeOrName(bookCode,bookName);
+    }
 }

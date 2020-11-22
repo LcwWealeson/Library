@@ -23,6 +23,8 @@ public class BorrowRecord {
 
     private Integer status;
 
+    private String bookCode;
+
     public Integer getId() {
         return id;
     }
@@ -101,5 +103,13 @@ public class BorrowRecord {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getBookCode() {
+        return bookCode;
+    }
+
+    public void setBookCode(String bookCode) {
+        this.bookCode = bookCode == null ? null : bookCode.trim();
     }
 }

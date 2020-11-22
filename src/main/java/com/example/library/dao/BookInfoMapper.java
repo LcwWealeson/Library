@@ -29,4 +29,8 @@ public interface BookInfoMapper {
     int updateByPrimaryKey(BookInfo record);
 
     List<BookInfo> getBookList();
+
+    List<BookInfo> getBookByCodeOrName(String bookName,String bookCode);
+
+
 }

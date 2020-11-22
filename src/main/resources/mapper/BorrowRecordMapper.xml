@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.library.dao.BorrowRecordMapper">
   <resultMap id="BaseResultMap" type="com.example.library.pojo.BorrowRecord">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="book_thirdcate" jdbcType="VARCHAR" property="bookThirdcate" />
     <result column="book_name" jdbcType="VARCHAR" property="bookName" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -12,6 +12,7 @@
     <result column="book_id" jdbcType="INTEGER" property="bookId" />
     <result column="continue_times" jdbcType="INTEGER" property="continueTimes" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="book_code" jdbcType="VARCHAR" property="bookCode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, book_thirdcate, book_name, user_id, start_time, end_time, own_time, book_id, 
-    continue_times, status
+    continue_times, status, book_code
   </sql>
   <select id="selectByExample" parameterType="com.example.library.pojo.BorrowRecordExample" resultMap="BaseResultMap">
     select
@@ -89,6 +90,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from borrow_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from borrow_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.example.library.pojo.BorrowRecordExample">
     delete from borrow_record
     <if test="_parameter != null">
@@ -99,11 +110,11 @@
     insert into borrow_record (id, book_thirdcate, book_name, 
       user_id, start_time, end_time, 
       own_time, book_id, continue_times, 
-      status)
+      status, book_code)
     values (#{id,jdbcType=INTEGER}, #{bookThirdcate,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{ownTime,jdbcType=TIMESTAMP}, #{bookId,jdbcType=INTEGER}, #{continueTimes,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER})
+      #{status,jdbcType=INTEGER}, #{bookCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.library.pojo.BorrowRecord">
     insert into borrow_record
@@ -138,6 +149,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="bookCode != null">
+        book_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -169,6 +183,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bookCode != null">
+        #{bookCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +228,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.bookCode != null">
+        book_code = #{record.bookCode,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -227,9 +247,85 @@
       own_time = #{record.ownTime,jdbcType=TIMESTAMP},
       book_id = #{record.bookId,jdbcType=INTEGER},
       continue_times = #{record.continueTimes,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      book_code = #{record.bookCode,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.library.pojo.BorrowRecord">
+    update borrow_record
+    <set>
+      <if test="bookThirdcate != null">
+        book_thirdcate = #{bookThirdcate,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownTime != null">
+        own_time = #{ownTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="continueTimes != null">
+        continue_times = #{continueTimes,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bookCode != null">
+        book_code = #{bookCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.library.pojo.BorrowRecord">
+    update borrow_record
+    set book_thirdcate = #{bookThirdcate,jdbcType=VARCHAR},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      own_time = #{ownTime,jdbcType=TIMESTAMP},
+      book_id = #{bookId,jdbcType=INTEGER},
+      continue_times = #{continueTimes,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      book_code = #{bookCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--自定义mapper-->
+  <select id="getAllBorrowRecord" resultMap="BaseResultMap">
+    select * from borrow_record
+    where status=1
+  </select>
+
+  <update id="updateStatusByIdAndBookCode">
+    update borrow_record
+    set status = 2
+    where id=#{borrowId} and book_Code=#{bookCode}
+  </update>
+
+  <select id="getByCodeOrName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from borrow_record
+    <where>
+      <if test="bookName != null">
+        and book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookCode != null">
+        and book_code = #{bookCode,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by book_code asc
+  </select>
 </mapper>

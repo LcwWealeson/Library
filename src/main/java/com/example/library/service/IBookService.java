@@ -12,4 +12,11 @@ public interface IBookService {
 
     ServerResponse getBook();
 
+    ServerResponse addBook(BookInfo bookInfo);
+
+    ServerResponse getBookByCodeOrName(String bookCode ,String bookName);
+
+
+
+
 }

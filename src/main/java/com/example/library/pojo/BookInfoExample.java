@@ -705,183 +705,63 @@ public class BookInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnIsNull() {
-            addCriterion("number_own is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnIsNotNull() {
-            addCriterion("number_own is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnEqualTo(Integer value) {
-            addCriterion("number_own =", value, "numberOwn");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnNotEqualTo(Integer value) {
-            addCriterion("number_own <>", value, "numberOwn");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnGreaterThan(Integer value) {
-            addCriterion("number_own >", value, "numberOwn");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnGreaterThanOrEqualTo(Integer value) {
-            addCriterion("number_own >=", value, "numberOwn");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnLessThan(Integer value) {
-            addCriterion("number_own <", value, "numberOwn");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnLessThanOrEqualTo(Integer value) {
-            addCriterion("number_own <=", value, "numberOwn");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnIn(List<Integer> values) {
-            addCriterion("number_own in", values, "numberOwn");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnNotIn(List<Integer> values) {
-            addCriterion("number_own not in", values, "numberOwn");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnBetween(Integer value1, Integer value2) {
-            addCriterion("number_own between", value1, value2, "numberOwn");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andNumberOwnNotBetween(Integer value1, Integer value2) {
-            addCriterion("number_own not between", value1, value2, "numberOwn");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedIsNull() {
-            addCriterion("number_borrowed is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedIsNotNull() {
-            addCriterion("number_borrowed is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedEqualTo(Integer value) {
-            addCriterion("number_borrowed =", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedNotEqualTo(Integer value) {
-            addCriterion("number_borrowed <>", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedGreaterThan(Integer value) {
-            addCriterion("number_borrowed >", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("number_borrowed >=", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedLessThan(Integer value) {
-            addCriterion("number_borrowed <", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedLessThanOrEqualTo(Integer value) {
-            addCriterion("number_borrowed <=", value, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedIn(List<Integer> values) {
-            addCriterion("number_borrowed in", values, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedNotIn(List<Integer> values) {
-            addCriterion("number_borrowed not in", values, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedBetween(Integer value1, Integer value2) {
-            addCriterion("number_borrowed between", value1, value2, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberBorrowedNotBetween(Integer value1, Integer value2) {
-            addCriterion("number_borrowed not between", value1, value2, "numberBorrowed");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayIsNull() {
-            addCriterion("number_stay is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayIsNotNull() {
-            addCriterion("number_stay is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayEqualTo(Integer value) {
-            addCriterion("number_stay =", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayNotEqualTo(Integer value) {
-            addCriterion("number_stay <>", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayGreaterThan(Integer value) {
-            addCriterion("number_stay >", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayGreaterThanOrEqualTo(Integer value) {
-            addCriterion("number_stay >=", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayLessThan(Integer value) {
-            addCriterion("number_stay <", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayLessThanOrEqualTo(Integer value) {
-            addCriterion("number_stay <=", value, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayIn(List<Integer> values) {
-            addCriterion("number_stay in", values, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayNotIn(List<Integer> values) {
-            addCriterion("number_stay not in", values, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayBetween(Integer value1, Integer value2) {
-            addCriterion("number_stay between", value1, value2, "numberStay");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumberStayNotBetween(Integer value1, Integer value2) {
-            addCriterion("number_stay not between", value1, value2, "numberStay");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
     }
