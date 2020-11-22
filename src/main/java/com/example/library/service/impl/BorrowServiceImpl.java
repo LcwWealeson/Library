@@ -29,23 +29,55 @@ public class BorrowServiceImpl implements IBorrowService {
     UserMapper userMapper;
 
 
+    //借阅系统 获取所有借阅预约申请
     @Override
     public ServerResponse getBorrowRecord() {
         List<BorrowRecord> borrowRecordList = borrowRecordMapper.getAllBorrowRecord();
         return ServerResponse.createBySuccessMessage("查询成功",borrowRecord2BorrowRecordVo(borrowRecordList));
     }
 
+    //归还系统 获取所有已借出但未归还的记录
     @Override
-    public ServerResponse borrowCheck(Integer borrowId,String bookCode) {
-        //前端判断书为0即不能借阅
-        borrowRecordMapper.updateStatusByIdAndBookCode(borrowId,bookCode);
-        return ServerResponse.createBySuccessMessage("借阅审批成功");
+    public ServerResponse getAllBorrowedRecord() {
+        return ServerResponse.createBySuccessMessage("查询成功",
+                borrowRecord2BorrowRecordVo(borrowRecordMapper.getAllBorrowedRecords()));
     }
 
+
+    //审核借阅通过
+    @Override
+    public ServerResponse borrowCheck(Integer borrowId,String bookCode) {
+        Integer status =2;
+        int bookRow = bookInfoMapper.updateStatusByIdAndBookCode(bookCode,status);
+        int recordRow = borrowRecordMapper.updateStatusByIdAndBookCode(borrowId,bookCode,status);
+        return ServerResponse.createBySuccessMessage("借阅审批成功："+bookRow+"，书籍代码："+bookCode);
+    }
+
+    //归还图书
+    @Override
+    public ServerResponse returnBook(Integer borrowId, String bookCode) {
+        Integer status =0;
+        int bookRow = bookInfoMapper.updateStatusByIdAndBookCode(bookCode,status);
+        int recordRow = borrowRecordMapper.updateStatusByIdAndBookCode(borrowId,bookCode,status);
+        return ServerResponse.createBySuccessMessage("归还图书几本："+bookRow+"，书籍代码："+bookCode);
+    }
+
+    //借阅系统查询 参数可为：书名、书籍代码
     @Override
     public ServerResponse getByCodeOrName(String bookName,String bookCode) {
         List<BorrowRecordVO> borrowRecordVOList = borrowRecord2BorrowRecordVo(borrowRecordMapper.getByCodeOrName(bookName,bookCode));
         return ServerResponse.createBySuccessMessage("获取对应书名或者书籍代码的书",borrowRecordVOList);
+    }
+    //归还系统查询 参数可为：书名、书籍代码
+    @Override
+    public ServerResponse getBorrowedByCodeOrName(String bookName, String bookCode) {
+        List<BorrowRecordVO> borrowRecordVOList = borrowRecord2BorrowRecordVo(borrowRecordMapper.getBorrowedByCodeOrName(bookName,bookCode));
+        return ServerResponse.createBySuccessMessage("获取对应书名或者书籍代码的书",borrowRecordVOList);
+    }
+
+    @Override
+    public ServerResponse updateBook(Integer bookId, String bookName) {
+        return ServerResponse.createBySuccessMessage("修改借阅表的书名",borrowRecordMapper.updateBook(bookId,bookName));
     }
 
     //BorrowRecord 和 BorrowRecordVO 类型转化 ，增加record对应的User，时间转化为string
