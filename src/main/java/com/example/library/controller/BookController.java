@@ -1,18 +1,12 @@
 package com.example.library.controller;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
 import com.example.library.common.ServerResponse;
 import com.example.library.pojo.BookInfo;
 import com.example.library.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -48,7 +42,18 @@ public class BookController {
     }
 
     @GetMapping("/getByCodeOrName")
-    public ServerResponse getByCodeOrName(String bookCode , String bookName){
+    public ServerResponse getByCodeOrName(String bookCode, String bookName){
         return bookService.getBookByCodeOrName(bookCode,bookName);
+    }
+
+    //下架图书
+    @GetMapping("/takeOffBook")
+    public ServerResponse deleteBook(Integer bookId){
+        return bookService.deleteByBookId(bookId);
+    }
+
+    @GetMapping("/updateBook")
+    public ServerResponse updateBook(Integer bookId,String bookName,String author,String publisher){
+        return bookService.updateBook(bookId,bookName,author,publisher);
     }
 }

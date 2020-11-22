@@ -8,10 +8,10 @@
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="publisher" jdbcType="VARCHAR" property="publisher" />
     <result column="location" jdbcType="VARCHAR" property="location" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="book_code" jdbcType="VARCHAR" property="bookCode" />
     <result column="store_time" jdbcType="TIMESTAMP" property="storeTime" />
     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    book_id, book_name, book_cate, author, publisher, location, status, book_code, store_time, 
-    image
+    book_id, book_name, book_cate, author, publisher, location, book_code, store_time, 
+    image, status
   </sql>
   <select id="selectByExample" parameterType="com.example.library.pojo.BookInfoExample" resultMap="BaseResultMap">
     select
@@ -108,12 +108,12 @@
   <insert id="insert" parameterType="com.example.library.pojo.BookInfo">
     insert into book_info (book_id, book_name, book_cate, 
       author, publisher, location, 
-      status, book_code, store_time, 
-      image)
+      book_code, store_time, image, 
+      status)
     values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookCate,jdbcType=INTEGER}, 
       #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{bookCode,jdbcType=VARCHAR}, #{storeTime,jdbcType=TIMESTAMP}, 
-      #{image,jdbcType=VARCHAR})
+      #{bookCode,jdbcType=VARCHAR}, #{storeTime,jdbcType=TIMESTAMP}, #{image,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.library.pojo.BookInfo">
     insert into book_info
@@ -136,9 +136,6 @@
       <if test="location != null">
         location,
       </if>
-      <if test="status != null">
-        status,
-      </if>
       <if test="bookCode != null">
         book_code,
       </if>
@@ -147,6 +144,9 @@
       </if>
       <if test="image != null">
         image,
+      </if>
+      <if test="status != null">
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -168,9 +168,6 @@
       <if test="location != null">
         #{location,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
       <if test="bookCode != null">
         #{bookCode,jdbcType=VARCHAR},
       </if>
@@ -179,6 +176,9 @@
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -209,9 +209,6 @@
       <if test="record.location != null">
         location = #{record.location,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
       <if test="record.bookCode != null">
         book_code = #{record.bookCode,jdbcType=VARCHAR},
       </if>
@@ -220,6 +217,9 @@
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -234,10 +234,10 @@
       author = #{record.author,jdbcType=VARCHAR},
       publisher = #{record.publisher,jdbcType=VARCHAR},
       location = #{record.location,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
       book_code = #{record.bookCode,jdbcType=VARCHAR},
       store_time = #{record.storeTime,jdbcType=TIMESTAMP},
-      image = #{record.image,jdbcType=VARCHAR}
+      image = #{record.image,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -260,9 +260,6 @@
       <if test="location != null">
         location = #{location,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
       <if test="bookCode != null">
         book_code = #{bookCode,jdbcType=VARCHAR},
       </if>
@@ -271,6 +268,9 @@
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
     </set>
     where book_id = #{bookId,jdbcType=INTEGER}
@@ -282,10 +282,56 @@
       author = #{author,jdbcType=VARCHAR},
       publisher = #{publisher,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
       book_code = #{bookCode,jdbcType=VARCHAR},
       store_time = #{storeTime,jdbcType=TIMESTAMP},
-      image = #{image,jdbcType=VARCHAR}
+      image = #{image,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
     where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+
+  <!--自定义mapper-->
+  <select id="getBookList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from book_info
+  </select>
+
+  <select id="getBookByCodeOrName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from book_info
+    <where>
+      <if test="bookName != null">
+        and book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookCode != null">
+        and book_code = #{bookCode,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by book_code asc
+  </select>
+
+  <update id="updateStatusByIdAndBookCode">
+    update book_info
+    set status =#{status}
+    where book_code =#{bookCode}
+  </update>
+
+  <delete id="deleteByBookId" parameterType="java.lang.Integer">
+    delete from book_info
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateBook" >
+    update book_info
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="author != null">
+        book_code = #{author,jdbcType=VARCHAR}
+      </if>
+      <if test="publisher != null">
+        book_code = #{publisher,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where book_id = #{bookId}
   </update>
 </mapper>

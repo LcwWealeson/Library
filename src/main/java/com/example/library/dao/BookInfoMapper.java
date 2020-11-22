@@ -32,5 +32,9 @@ public interface BookInfoMapper {
 
     List<BookInfo> getBookByCodeOrName(String bookName,String bookCode);
 
+    int updateStatusByIdAndBookCode(String bookCode, Integer status);
 
+    int deleteByBookId(Integer bookId);
+
+    int updateBook(Integer bookId, String bookName, String author, String publisher);
 }
