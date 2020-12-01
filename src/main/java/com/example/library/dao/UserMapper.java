@@ -30,4 +30,9 @@ public interface UserMapper {
 
     User selectUserByAccount(@Param("account") String account);
 
+    List<User> selectUserByTypeIs1();
+
+    void resetPwdToDefault(Integer userId, String md5Pwd);
+
+    void removeUserById(Integer userId);
 }

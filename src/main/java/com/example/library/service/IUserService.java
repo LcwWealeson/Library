@@ -12,6 +12,9 @@ public interface IUserService {
 
     ServerResponse register(UserVO userVO);
 
-    User login(String account);
+    ServerResponse getUserList();
 
+    ServerResponse resetPassword(Integer userId);
+
+    ServerResponse removeUserById(Integer userId);
 }

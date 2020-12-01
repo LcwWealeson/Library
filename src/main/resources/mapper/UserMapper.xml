@@ -9,6 +9,13 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
+  <resultMap id="BaseResultMapWithoutPwd" type="com.example.library.pojo.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -225,9 +232,32 @@
       image = #{image,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
   <select id="selectUserByAccount" parameterType="java.lang.String" resultType="com.example.library.pojo.User">
     select *
     from user
     where account = #{account,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectUserByTypeIs1" resultMap="BaseResultMapWithoutPwd">
+    select <include refid="WithoutPwd"></include>
+    from user
+    where type = 1
+  </select>
+
+  <sql id="WithoutPwd">
+    user_id, account, username, type, image
+  </sql>
+
+  <update id="resetPwdToDefault">
+    update user
+    set password = #{md5Pwd}
+    where user_id = #{userId} and type = 1
+  </update>
+
+  <delete id="removeUserById" parameterType="java.lang.Integer">
+    delete
+    from user
+    where user_id = #{userId}
+  </delete>
 </mapper>
