@@ -17,4 +17,8 @@ public interface IUserService {
     ServerResponse resetPassword(Integer userId);
 
     ServerResponse removeUserById(Integer userId);
+
+    ServerResponse addNewUser(User user);
+
+    ServerResponse modifyUser(User user);
 }

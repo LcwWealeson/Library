@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
         else if(!Md5password.equals(user.getPassword())){
             return ServerResponse.createByErrorMessage("账户或密码错误");
         }
-        user.setPassword("你看尼玛呢！");
+        user.setPassword("不给看！！");
         return ServerResponse.createBySuccessMessage("登陆成功",user);
     }
 
@@ -54,4 +54,17 @@ public class UserServiceImpl implements IUserService {
         userMapper.removeUserById(userId);
         return ServerResponse.createBySuccessMessage("移除用户信息成功，用户id :"+userId);
     }
+
+    @Override
+    public ServerResponse addNewUser(User user) {
+        user.setPassword(MD5Util.MD5(user.getPassword()));//加密
+        return ServerResponse.createBySuccessMessage("成功添加"+userMapper.insertNewUser(user)+"位用户");
+    }
+
+    @Override
+    public ServerResponse modifyUser(User user) {
+        return ServerResponse.createBySuccessMessage("成功修改"+userMapper.modifyUser(user)+"位用户");
+    }
+
+
 }
