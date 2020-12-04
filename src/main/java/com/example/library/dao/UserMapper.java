@@ -28,11 +28,15 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User selectUserByAccount(@Param("account") String account);
+    User selectUserByAccount(String account);
 
     List<User> selectUserByTypeIs1();
 
-    void resetPwdToDefault(Integer userId, String md5Pwd);
+    void resetPwdToDefault(Integer userId, String md5);
 
     void removeUserById(Integer userId);
+
+    int insertNewUser(User user);
+
+    int modifyUser(User user);
 }

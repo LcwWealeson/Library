@@ -28,15 +28,15 @@ public interface BorrowRecordMapper {
 
     int updateByPrimaryKey(BorrowRecord record);
 
+    int updateBook(Integer bookId, String bookName);
+
     List<BorrowRecord> getAllBorrowRecord();
-
-    List<BorrowRecord> getByCodeOrName(String bookName,String bookCode);
-
-    int updateStatusByIdAndBookCode(Integer borrowId, String bookCode, Integer status);
-
-    List<BorrowRecord> getBorrowedByCodeOrName(String bookName,String bookCode);
 
     List<BorrowRecord> getAllBorrowedRecords();
 
-    int updateBook(Integer bookId, String bookName);
+    int updateStatusByIdAndBookCode(Integer borrowId, String bookCode, Integer status);
+
+    List<BorrowRecord> getByCodeOrName(String bookName, String bookCode);
+
+    List<BorrowRecord> getBorrowedByCodeOrName(String bookName, String bookCode);
 }
