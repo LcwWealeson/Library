@@ -15,6 +15,10 @@ public class User {
 
     private String image;
 
+    public User() {
+
+    }
+
     public User(String account, String password, String username, Integer type) {
         this.account = account;
         this.password = password;

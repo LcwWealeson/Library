@@ -83,11 +83,13 @@ public class BorrowServiceImpl implements IBorrowService {
     //BorrowRecord 和 BorrowRecordVO 类型转化 ，增加record对应的User，时间转化为string
     public List<BorrowRecordVO> borrowRecord2BorrowRecordVo(List<BorrowRecord> borrowRecordList) {
         List<BorrowRecordVO> borrowRecordVOList = new ArrayList<>();
-        String timeStart;
-        String timeEnd;
-        User user;
-        BorrowRecordVO borrowRecordVO = new BorrowRecordVO();
+
         for (BorrowRecord borrowRecord : borrowRecordList) {
+            String timeStart;
+            String timeEnd;
+            User user;
+            BorrowRecordVO borrowRecordVO = new BorrowRecordVO();
+
             timeStart = DateUtil.dateToStr(borrowRecord.getStartTime());
             timeEnd = DateUtil.dateToStr(borrowRecord.getEndTime());
             BeanUtils.copyProperties(borrowRecord, borrowRecordVO);

@@ -16,21 +16,15 @@ public interface BookInfoMapper {
 
     int insertSelective(BookInfo record);
 
-    List<BookInfo> selectByExampleWithBLOBs(BookInfoExample example);
-
     List<BookInfo> selectByExample(BookInfoExample example);
 
     BookInfo selectByPrimaryKey(Integer bookId);
 
     int updateByExampleSelective(@Param("record") BookInfo record, @Param("example") BookInfoExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") BookInfo record, @Param("example") BookInfoExample example);
-
     int updateByExample(@Param("record") BookInfo record, @Param("example") BookInfoExample example);
 
     int updateByPrimaryKeySelective(BookInfo record);
-
-    int updateByPrimaryKeyWithBLOBs(BookInfo record);
 
     int updateByPrimaryKey(BookInfo record);
 

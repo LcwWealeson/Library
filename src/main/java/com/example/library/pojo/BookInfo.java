@@ -19,9 +19,9 @@ public class BookInfo {
 
     private Date storeTime;
 
-    private Integer status;
-
     private String image;
+
+    private Integer status;
 
     public Integer getBookId() {
         return bookId;
@@ -87,19 +87,19 @@ public class BookInfo {
         this.storeTime = storeTime;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image == null ? null : image.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

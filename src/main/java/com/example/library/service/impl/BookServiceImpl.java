@@ -56,6 +56,11 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public ServerResponse deleteByBookId(Integer bookId) {
+        BookInfo bookInfo=bookInfoMapper.selectByPrimaryKey(bookId);
+        if (bookInfo.getStatus()==1||bookInfo.getStatus()==2){
+            return ServerResponse.createBySuccessMessage(bookInfo.getBookName()+",该书存在借阅申请或者已借出的流程,不可以下架！" +
+                    "bookCode:"+bookInfo.getBookCode());
+        }
         int row =bookInfoMapper.deleteByBookId(bookId);
         return ServerResponse.createBySuccessMessage("下架图书"+row+"行，"+bookId);
     }
